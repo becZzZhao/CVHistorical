@@ -14,7 +14,7 @@ class Horizontal():
     def find_all_dots(binary_page, display = False):
         print("****************begin horizontal line detection")
 
-
+        # these are hand-made kernels/ scanners. 
         oneDot = np.array([
                         [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0],
                         [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0],
@@ -56,6 +56,8 @@ class Horizontal():
                         [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0],
                         ], np.uint8)
 
+        
+    
         twoDots =np.array(            [[0,0,1,0,0, 0, 0,0,1,0,0],
                                        [1,1,1,1,1, 0, 1,1,1,1,1],
                                        [1,1,1,1,1, 0, 1,1,1,1,1],
@@ -106,6 +108,8 @@ class Horizontal():
         return dots
         #primitively define a horizontal by rows of dots
 
+    # the detected dots are good references for the horizontal border of the table. 
+    # convert detected dots to lines. 
     @staticmethod
     def dotted_to_lines(dots_img):
         sixDots = np.array(           [[0,0,1,0,0, 0,0, 0,0,1,0,0, 0,0, 0,0,1,0,0, 0,0, 0,0,1,0,0, 0,0, 0,0,1,0,0, 0,0, 0,0,1,0,0],
@@ -130,8 +134,10 @@ class Horizontal():
 
         return lines
 
+    
+    #get rid of two lines that are very close
     @staticmethod
-    def filter(lines, page_length):                                      #get rid of two lines that are very close
+    def filter(lines, page_length):                                      
 
         num_lines = len(lines)
         list = []
@@ -226,6 +232,8 @@ class Horizontal():
 
         return horizontals_populated
 
+    
+    # combine all methods above, draw results on a binary page. 
     @staticmethod
     def create_row_borders(page, draw = True):
         dots = Horizontal.find_all_dots(page)
