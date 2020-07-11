@@ -1,5 +1,7 @@
 # CVHistorical, reading historical documents with computer vision techniques
-Reading historical documents with computer vision techniques. <br />
+Reading historical documents with computer vision techniques. Written in an OOP environment.<br />
+
+&nbsp;
 This is a side project of my undergraduate research work in the field of economic history. My work involves digitizing millions of historical economic indicators from scanned historical documents. The intention of this project is to allow the digitization to be conducted in a time-saving and cost-saving manner. This project is an example of my interest in machine vision, ability and motivation to explore all possible solutions for my problem. <br />
 &nbsp;
 &nbsp;
