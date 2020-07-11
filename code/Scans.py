@@ -1,3 +1,5 @@
+# load scanned images
+
 import glob
 import cv2
 
