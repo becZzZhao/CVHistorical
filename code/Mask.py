@@ -1,4 +1,4 @@
-### Try directly image to text first, then get box, etc.
+### combine horizontal detection (horizontal.py) and vertical detection (vertical.py)
 
 from Page import Page
 from Vertical import Vertical
