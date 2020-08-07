@@ -1,4 +1,4 @@
-# CVHistorical, reading historical documents with computer vision techniques
+# CVHistorical, reading historical documents with computer vision techniques in an OOP environment. 
 Reading historical documents with computer vision techniques. Written in an OOP environment.<br />
 
 &nbsp;
