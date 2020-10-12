@@ -13,24 +13,32 @@ class Page:
 
 
     @staticmethod
-    def rawtobinary(image_directory):                                          # turn jpg>nparray> binary_nparray. this method combines the rawtogrey() and greytobinary, and converts a raw page to a binary directly.
+    def rawtobinary(image_directory, locationRef = None):                                          # turn jpg>nparray> binary_nparray. this method combines the rawtogrey() and greytobinary, and converts a raw page to a binary directly.
         my_raw_page = Image.open(image_directory)
 
-        top = 100              #crop the white edges
-        bottom = 3375
-        left = 360
-        right = 2232
-        cropped_page = my_raw_page.crop((left,top,right,bottom))
 
 
-        to_nparray = np.array(cropped_page)        #cv2 only read np.array.
+        to_nparray = np.array(my_raw_page)        #cv2 only read np.array.
         my_grey_page = cv2.cvtColor(to_nparray, cv2.COLOR_BGR2GRAY)
         my_binary_page = cv2.adaptiveThreshold(
                                           my_grey_page, 255,  # change the gray image to binary
                                           cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
                                           cv2.THRESH_BINARY_INV, 15,
                                           18)
-        return my_binary_page
+
+        if locationRef == None:
+            return my_binary_page
+        else:
+            return Page.cropImg(locationRef,my_binary_page)
+
+    @staticmethod
+    def cropImg(locationRef, binaryPage):
+        top, bottom, left, right = locationRef
+        crop_img = binaryPage[top:bottom, left:right]
+
+        return crop_img
+
+
     @staticmethod
     def display(any_page):
         plt.imshow(any_page, cmap='gray', interpolation='bicubic')  # display image
@@ -45,12 +53,14 @@ class Page:
         return blank_page
 
 
+
+    # load a raw page to nd.array, can use Page.display() to display the raw material.
     @staticmethod
     def load_colored (image_directory):
         my_raw_page = Image.open(image_directory)
 
         top = 100  # crop the white edges
-        bottom = 3375
+        bottom = 2700
         left = 360
         right = 2232
         cropped_page = my_raw_page.crop((left, top, right, bottom))
@@ -61,7 +71,11 @@ class Page:
 
 
     @staticmethod
-    def draw_lines(lines_list,page, display = False):
+    # one straight line
+    # given a list of lines in the format of [x1, y1, x2, y2], draw lines on the page.
+    # if want to display, draw very thick lines.
+
+    def draw_lines(lines_list, page, display = False):
 
         for i in range(len(lines_list)):
             x1 = lines_list[i][0]
@@ -72,7 +86,7 @@ class Page:
             if display == False:
                 lines = cv2.line(page, (x1,y1),(x2,y2),255,1)
             else:
-                lines = cv2.line(page, (x1, y1), (x2, y2), 255, 3)
+                lines = cv2.line(page, (x1, y1),(x2, y2), 255, 3)
 
         Page.display(lines)
         return lines
