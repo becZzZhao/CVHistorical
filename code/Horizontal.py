@@ -60,11 +60,7 @@ class Horizontal():
                                 , minLineLength=200
                                 , maxLineGap=700)
 
-        if display == True:
-            # for x1, y1, x2, y2 in lines[0]:
-            #     cv2.line(dots_img, (x1, y1), (x2, y2), (0, 255, 0), 3)
-            #     Page.display(dots_img)
-            Page.display(horizontal_line)
+        if display == True: Page.display(horizontal_line)
         numLines = len(lines)
 
         print("number of lines", numLines)
@@ -125,41 +121,41 @@ class Horizontal():
             y_next = filtered_horizontals[i+1][1]
             horizontals_populated.append([x1,y_current,x2, y_current])
 
-            print("y_current: ", y_current)
+            # print("y_current: ", y_current)
             y_next = filtered_horizontals[i+1][1]
             line_distance = y_next-y_current
             num_lines_between= int(math.ceil(line_distance/33))-1
-            print("real num lines between", line_distance/33, num_lines_between)
+            # print("real num lines between", line_distance/33, num_lines_between)
             if num_lines_between > 0:
                 last_line_y = int(y_current)     ##################other wise address gets messed up
                 for m in range(num_lines_between):
                     new_line_y = last_line_y + 33
-                    print(last_line_y, new_line_y, "distance: " ,new_line_y-last_line_y)
+                    # print(last_line_y, new_line_y, "distance: " ,new_line_y-last_line_y)
                     if y_next-new_line_y >30:
                         horizontals_populated.append([x1, new_line_y, x2, new_line_y])
-                        print("appended: ", new_line_y)
+                        # print("appended: ", new_line_y)
                     last_line_y = int(new_line_y)
 
-        print("while loop 1")
+        # print("while loop 1")
         reached_the_bottom = False
         line_above = int(horizontals_populated[len(horizontals_populated)-1][1])
         while(reached_the_bottom == False):
             new_line_y = line_above + 33
             if new_line_y < page_height:
                 horizontals_populated.append([x1, new_line_y, x2, new_line_y])
-            print("appended: ", new_line_y)
+            # print("appended: ", new_line_y)
             line_above = int(new_line_y)
             if page_height- new_line_y < 30:
                 reached_the_bottom = True
 
-        print("while loop 2")
+        # print("while loop 2")
         reached_the_top = False
         line_below = int(horizontals_populated[0][1])
         while (reached_the_top == False):
             new_line_y = line_below - 33
             if new_line_y >0:
                  horizontals_populated.append([x1, new_line_y, x2, new_line_y])
-            print("appended: ", new_line_y)
+            # print("appended: ", new_line_y)
             line_below = int(new_line_y)
             if new_line_y < 3:
                 reached_the_top = True

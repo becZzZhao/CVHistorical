@@ -44,6 +44,35 @@ class Page:
         plt.imshow(any_page, cmap='gray', interpolation='bicubic')  # display image
         plt.xticks([]), plt.yticks([])  # to hide tick values on X and Y axis
         plt.show()
+    @staticmethod
+    def show_images(images, numCol=3) -> None:
+        n: int = len(images)
+        f = plt.figure()
+        for i in range(n):
+            f.add_subplot(n, numCol, i + 1)  # (total # of img, num col, index in list)
+            plt.xticks([]), plt.yticks([])
+            plt.imshow(images[i], cmap='gray', interpolation='bicubic')
+        plt.show(block=True)
+
+
+    def show_cell_in_table(cell_images) -> None:
+        nCol = len(cell_images[0])
+        nrow = len(cell_images)
+
+
+        cell_images_extract = [cell for row in cell_images for cell in row]
+        f = plt.figure(figsize=(30, 80))
+        for i in range(nrow*nCol):
+            f.add_subplot(nrow, nCol, i + 1)  # (total # of img, num col, index in list)
+            plt.xticks([]), plt.yticks([])
+            plt.imshow(cell_images_extract[i], cmap='gray', interpolation='bicubic')
+
+
+        plt.show(block=True)
+
+
+        # expressed as a fraction of the average axis height
+
 
     @staticmethod
     def create_blankpage(size_referece_page):                   #create a blank (in black) page of the same size as self.
@@ -59,13 +88,13 @@ class Page:
     def load_colored (image_directory):
         my_raw_page = Image.open(image_directory)
 
-        top = 100  # crop the white edges
-        bottom = 2700
-        left = 360
-        right = 2232
-        cropped_page = my_raw_page.crop((left, top, right, bottom))
+        # top = 100  # crop the white edges
+        # bottom = 2700
+        # left = 360
+        # right = 2232
+        # cropped_page = my_raw_page.crop((left, top, right, bottom))
 
-        to_nparray = np.array(cropped_page)
+        to_nparray = np.array(my_raw_page)
 
         return to_nparray
 
@@ -75,7 +104,7 @@ class Page:
     # given a list of lines in the format of [x1, y1, x2, y2], draw lines on the page.
     # if want to display, draw very thick lines.
 
-    def draw_lines(lines_list, page, display = False):
+    def draw_lines(lines_list, page,thickness = 1, display = False):
 
         for i in range(len(lines_list)):
             x1 = lines_list[i][0]
@@ -83,12 +112,10 @@ class Page:
             x2 = lines_list[i][2]
             y2 = lines_list[i][3]
 
-            if display == False:
-                lines = cv2.line(page, (x1,y1),(x2,y2),255,1)
-            else:
-                lines = cv2.line(page, (x1, y1),(x2, y2), 255, 3)
+            lines = cv2.line(page, (x1,y1),(x2,y2),255,thickness)
 
-        Page.display(lines)
+        if display == True: Page.display(lines)
+
         return lines
 
 
