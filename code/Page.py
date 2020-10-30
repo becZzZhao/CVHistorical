@@ -16,8 +16,6 @@ class Page:
     def rawtobinary(image_directory, locationRef = None):                                          # turn jpg>nparray> binary_nparray. this method combines the rawtogrey() and greytobinary, and converts a raw page to a binary directly.
         my_raw_page = Image.open(image_directory)
 
-
-
         to_nparray = np.array(my_raw_page)        #cv2 only read np.array.
         my_grey_page = cv2.cvtColor(to_nparray, cv2.COLOR_BGR2GRAY)
         my_binary_page = cv2.adaptiveThreshold(
