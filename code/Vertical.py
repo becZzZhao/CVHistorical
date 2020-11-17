@@ -22,11 +22,18 @@ class Vertical(Page):
         return vertical_contours
 
     @staticmethod
-    def determine_houghlines(somecontours_binary_nparr, display = False):            #takes any binary array that contains potential lines, use cv2.houghline to detect lines, and store the x1,y1,x2,y2 values to a list
-        threshold = 500
-        minLineLength = 600
+    def determine_houghlines(somecontours_binary_nparr, display = False):
+        #takes any binary array that contains potential lines, use cv2.houghline to detect lines, and store the x1,y1,x2,y2 values to a list
+
+        threshold = 50
+        minLineLength = 50
         maxLineGap = 300
-        lines = cv2.HoughLinesP(somecontours_binary_nparr, 1, np.pi/180, threshold, minLineLength, maxLineGap)
+        lines = cv2.HoughLinesP(somecontours_binary_nparr,
+                                1,
+                                np.pi/180,
+                                threshold,
+                                minLineLength,
+                                maxLineGap)
 
         numlines = int(len(lines))                             # ************ error: QAQ the input was not iterable beccause this value was not set to an int. I think.
         print("number of [vertical lines of min length = ", minLineLength, "from HoughineLine: ", numlines,
@@ -37,7 +44,7 @@ class Vertical(Page):
             for i in range(numlines):
                 for x1, y1, x2, y2 in lines[i]:
                     p = cv2.line(p, (x1, y1), (x2, y2), 255, 2)
-            Page.display(p)
+
         return lines # a list obj [[[]],[[]]]
 
     @staticmethod
@@ -46,27 +53,32 @@ class Vertical(Page):
         print(pt_list[0])
         if len(pt_list[0] )== 2:
             for [(x1,y1),(x2,y2)] in pt_list:
+                if color == "rand":
+                    color = random.randrange(0,255), random.randrange(0,255)
                 lines = cv2.line(any_image, (x1,y1), (x2,y2), color, thickness)
         elif len(pt_list[0]) ==1:
             for [[x1,y1,x2,y2]] in pt_list:
+                if color == "rand":
+                    color = random.randrange(0,255), random.randrange(0,255)
                 lines = cv2.line(any_image, (x1,y1), (x2,y2), color, thickness)
         else:
             for [x1,y1,x2,y2] in pt_list:
+                if color == "rand":
+                    color = random.randrange(0,255), random.randrange(0,255)
                 lines = cv2.line(any_image, (x1,y1), (x2,y2), color, thickness)
 
 
-        if(display == True):
 
+
+        if(display == True):
             Page.display(lines)
 
         return lines
 
     @staticmethod
     def finalize_vertical_line(houghlines_pts,page_height = 0, monitor = False, display = False):
-        print(">Finalizing Vertical Borders <")
-
         ptList = [[(x1,y1), (x2,y2)] for [[x1,y1, x2,y2]] in houghlines_pts]
-        ptList.sort(key = lambda k: k[1][0])
+        ptList.sort(key = lambda k: k[1][0]) # sorting on x2
         final_lines = []
 
         xAvg = ptList[0][0][0]
@@ -83,12 +95,16 @@ class Vertical(Page):
             if xDist < 10:
                 xAvg = (x1_current + xAvg)/2
 
-            if xDist > 150:
+            elif xDist > 50:
                 (x1,y1), (x2,y2) = lastLine
                 finalLine = [int(xAvg),0, x2,page_height]
                 final_lines.append(finalLine)
                 xAvg = x1_current
 
+
+            else:
+                print("last line", lastLine)
+                print("current line", currentLine)
             if i == len(ptList) -1:
                 (x1, y1), (x2, y2) = currentLine
                 finalLine = [int(xAvg),0, x2,page_height]
