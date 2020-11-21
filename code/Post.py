@@ -8,6 +8,62 @@ from datetime import datetime
 
 class Post:
     @staticmethod
+    def analyze_header_info(header):
+        next
+
+        # split string
+        # look for department, if found and no state info, it is header_page.
+        # look for state information, if found, it is a header_state, the table header.
+        # the block of text bellow header_state is the table content, assign state to
+        # skip column name at this point.
+        # use a dict
+
+    @staticmethod
+    def check_header_info(header_list):
+
+        numHeader_state = 0
+        header_state_list = []
+        for [header, (x,y,w,h)] in header_list:
+            office_and_state = regex.split('—|\s', header) # split by either space and "-" sign. | is a seperator for seperators.
+            state_names = Post.check_state_info(office_and_state)
+
+            if state_names!=None:
+                header_state_list.append([state_names[0], (x,y,w,h)])# on top of a page, there might be multiple state names in the header_state indicating the informaiton of the entire page
+                                                        # select the first statename since it contains information about the immediate table box below.
+                numHeader_state +=1
+
+        keys = ["header_%s"%int(i+1) for i in range(numHeader_state)]
+        header_dict = dict(zip(keys,header_state_list))
+        print(header_dict)
+
+        # remove stop words and get office informaiton from the rest of the list. 
+
+        # d = dict(zip(L1, L2))
+
+
+            # print(state)
+
+    @staticmethod
+    def check_state_info(header):
+        print("***********************************")
+        print(header)
+        my_file = open("state_names.txt", "r")
+        with open("state_names.txt") as f:
+            state_list = f.read().splitlines()
+        state_names = []
+        for myStr in header:
+            myStr = myStr.title()
+            result = [x for x in state_list if regex.match("(?:%s){e<=1}" % x, myStr) !=None ]
+            if len(result) >0:
+                state_names.append(result[0])
+        print("found state: %s"% state_names)
+
+        if len(state_names)>0:
+            return state_names
+        else:
+            return None
+
+    @staticmethod
     def clean_header(header):
         # states = pd.read_csv('state_names.txt', sep = '\t')
         my_file = open("state_names.txt", "r")

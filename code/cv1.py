@@ -15,6 +15,7 @@ import pandas as pd
 import os
 from Post import Post
 from Post import Name
+# from OCRAug import OCRAug
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 a = pytesseract.get_tesseract_version()
 print(a)
@@ -23,12 +24,104 @@ pd.set_option("display.max_columns", 10)
 pd.set_option("display.max_rows", 200)
 np.set_printoptions(linewidth=5000, threshold=5000)
 
-binary = Page.rawtobinary(image_directory = "test_Page_11.jpg")
-colored = Page.load_colored("test_Page_11.jpg")
-colored = imutils.resize(colored, height=3663, width=2831)
-binary = imutils.resize(binary, height=3663, width=2831)
+# two sectional sample: "OR_test_departs_16.jpg" "OR_test_departs_6.jpg"
+# skew sample: "OR_test_departs_10.jpg"
+# pic = r"test_pages\\test_Page_11.jpg"
+# pic = "OR_test_11.jpg"
+# pic = "OR_test_departs_12.jpg"
+config = "--psm 3 -l eng"
+binary = Page.rawtobinary(image_directory="test_pages/test_Page_11.jpg")
+colored = Page.load_colored("test_pages/test_Page_11.jpg")
+# OCR.Page_to_DF(colored, binary,display = True)
+# for i in range(6,7):
+#     pic = r"test_pages\\OR_test_departs_%s.jpg" %i
+#     binary = Page.rawtobinary(image_directory=pic)
+#     colored = Page.load_colored(pic)
+#     colored = imutils.resize(colored, height=3663, width=2831)
+#     binary = imutils.resize(binary, height=3663, width=2831)
+#
+#     ROI_rect = OCR.get_general_ROIs(colored, binary,display = False)
+#     header_list = OCR.OCR_general_ROIs(colored,ROI_rect, display = False)
 
-OCR.Page_to_DF(colored, binary, display = True, inspect = True)
+
+header_list = [['*%*252', (1944, 189, 439, 66)], ['POST OFFICE DEPARTMENT', (829, 210, 1038, 65)], ['POST OFFICES—  Tennessee— Texas', (826, 377, 1051, 59)], ['POST OFFICES IN TEXAS', (923, 2220, 919, 59)]]
+
+Post.check_header_info(header_list)
+
+# OCR.classify_general_ROIs(OCR_out = header_list)
+
+
+
+
+# OCRAug.gen_original_chars()
+#
+# import OCR
+# import numpy as np
+# from Page import Page
+# import cv2
+# from PIL import ImageFont, ImageDraw, Image
+# import imutils
+#
+# class OCRAug():
+#     @staticmethod
+#     def gen_original_chars():
+#         #https://github.com/pholls/patent_bot/tree/48aec4c0ce1dc5756009e8fb495979dfcfee44e7/assets/fonts/Times_New_Roman
+#         w,h = 60, 60
+#         img = Image.new(mode='RGB', size=(h, w), color=(0,0,0))
+#         char_list_upper = list("ABCDEFGHIJKLMN")
+#         print(char_list_upper)
+#
+#         for char in char_list_upper:
+#             print(char)
+#
+#             myChar = img.copy()
+#             draw = ImageDraw.Draw(myChar)
+#             font1 = ImageFont.truetype("Times_New_Roman.ttf", size = 50)
+#             font2 = ImageFont.truetype("Times_New_Roman_Italic.ttf", size = 50)
+#             size = font1.getsize(char)
+#             draw.text((10,0), char, font=font1, size = size) # when it's 100 it reached some maximum size
+#             myChar.save(r"chars\A.png", "PNG")
+#             img.show()
+
+
+
+
+
+# some more inspection **************************
+# binary = Page.rawtobinary(image_directory = pic)
+# colored = Page.load_colored(pic)
+# colored = imutils.resize(colored, height=3663, width=2831)
+# binary = imutils.resize(binary, height=3663, width=2831)
+#
+# OCR.Page_to_DF(colored, binary, display = True, inspect = 'TESS')
+#
+
+
+
+# store results************************************
+# # Page.display(colored)
+# a, b = OCR.two_dimensional_deskew(colored, display = False)
+#
+# binary_a = Page.colored_to_binary(a)
+# binary_b = Page.colored_to_binary(b)
+#
+#
+# print("deskewed result")
+# h, v, m = OCR.get_mask( binary_a, a, display = False)
+# Page.display(m)
+# cv2.imwrite("20201118_deskew_S3_result2_mask_beofre_deskew.png", m)
+#
+# print("before- deskew result")
+# h, v, m =OCR.get_mask( binary,colored, display = False )
+# cv2.imwrite("20201118_deskew_S3_result2_mask_after_deskew.png", m)
+
+
+# 20201118_deskew_S3_result2_mask_beofre_deskew
+
+# d = OCR.inspect_pytesseract_ROI_recognition(colored, colored, config, display = False)
+# cv2.imwrite("20201118_pytesseract_psm3_OTD12.png", d)
+#
+
 
 # **********************clean df using chunk processing and then reload.
 # inpath = r"D:\MLProjects\CVHistorical\external_data\1850_to_1880_names_only.csv"
@@ -107,7 +200,6 @@ OCR.Page_to_DF(colored, binary, display = True, inspect = True)
 #     binary = Page.rawtobinary(path)
 #     OCR.get_header_ROIs(binary)
 
-# out = OCR.Page_to_DF("test_Page_11.jpg", display = False)
 
 
 
