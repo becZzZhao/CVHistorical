@@ -6,3 +6,5 @@
 2. Optical Character Recognition (use synthetic data to enhance LSTM performance in OCR)
 3. Post process (use NLP techniques to enhance output accuracy. Restrict results to dictionary)
 
+
+
