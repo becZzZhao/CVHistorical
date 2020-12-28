@@ -1,10 +1,14 @@
-# CVHistorical, reading historical documents with computer vision techniques in an OOP environment. 
-- The purpose of this project is to build an optical character recognition (OCR) tool that automatically extract informaiton from 10,000+ pages of historical materials in the format of table. Commerical software does not work well on many historical which are very often oddly structured. I work with existing opensource packages to build up my own solution.
-- The techqniues that are relevant to this project: Machine Vision, NLP, LSTM. 
+Please refer to "Using Deep Learning Techniques to Improve OCR solutions - V1.pptx" for a description of the current state (results, proposal, etc.) and the background of this project.\
+\
+\
+relevant codes are include in two folders:\
 
-1. Customize page, table and character segmentation using computer vision techinques. 
-2. Optical Character Recognition (use synthetic data to enhance LSTM performance in OCR)
-3. Post process (use NLP techniques to enhance output accuracy. Restrict results to dictionary)
-
-
+customized_ocr: all codes related to customized page segmentation and ocr scripts in Python. \ 
+### batch_test.py: test ocr code on hundreds of pages.
+### Horizontal.py, Vertical.py: page segmentation scriptons. Detects horizontal and vertical table borders through morphological transformation and other techinques. 
+### OCR.py: combine page segmentation scripts and connect segmented pages to Tesseract. 
+### eval.py: evaluate the test results using the Character Error Rate metric.
+### ETL.py : extract and prepare data from pdf. 
+### Page.py: helper scripts for image redering. 
+traning_tesseract: shell scripts that trains ocr for one font in linux. \
 
