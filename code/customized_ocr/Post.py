@@ -8,108 +8,56 @@ from datetime import datetime
 
 class Post:
     @staticmethod
-    def analyze_page_sections(header):
-        # takes a list of detected header OCR text results and locations. 
-        # analyse the content of the text body and return the label and the location of diffrent sections.
+    def analyze_header_info(header):
+        next
 
-        section_dict, other_sections = Post.check_header_info(header)
-
-
-        # there are text body between each headers, so we use this to determine the location of the text body
-        office_header_keys = [key for key in section_dict.keys() if regex.search('^office_header_',key)!=None]
-        office_header_loc = [section_dict[key][1] for key in office_header_keys]
-
-        table_body_loc = []
-        for [text, (x,y,w,h)] in other_sections:
-            if (w>1000 and h>400):
-                table_body_loc.append(['table_body',(x,y,w,h)])
-
-        table_body_key = ["table_body_%s"% str(i+1) for i in range(0,len(table_body_loc) )]
-
-        # add text body information to ditionary
-        i = 0
-        for key in table_body_key:
-            section_dict[key] = table_body_loc[i]
-            i+=1
-
-        # sort by y
-        if section_dict['department_header']== '':
-            print("no department header found")
-            del section_dict['department_header']
-
-        sorted_section_dict = {k: v for k, v in sorted(section_dict.items(), key=lambda item: item[1][1][1])}
-
-        return sorted_section_dict
+        # split string
+        # look for department, if found and no state info, it is header_page.
+        # look for state information, if found, it is a header_state, the table header.
+        # the block of text bellow header_state is the table content, assign state to
+        # skip column name at this point.
+        # use a dict
 
     @staticmethod
     def check_header_info(header_list):
-        # p7 p16 problem
+
         numHeader_state = 0
         header_state_list = []
-        department_header = ''
-        others = []
         for [header, (x,y,w,h)] in header_list:
-            header = regex.split('—|\s', header) # split by either space and "-" sign. | is a seperator for seperators.
-
-            # check whehter the header is a department
-            department_check = Post.check_department_info(header)
-            if (department_check != None) and (department_header ==''):
-                department_name = department_check
-                department_header = [department_name,(x,y,w,h)]
-                continue
-
-            # check whether the header contains state informaiton
-            office_and_state = [x for x in header if x != 'IN']
+            office_and_state = regex.split('—|\s', header) # split by either space and "-" sign. | is a seperator for seperators.
             state_names = Post.check_state_info(office_and_state)
 
             if state_names!=None:
                 header_state_list.append([state_names[0], (x,y,w,h)])# on top of a page, there might be multiple state names in the header_state indicating the informaiton of the entire page
                                                         # select the first statename since it contains information about the immediate table box below.
                 numHeader_state +=1
-                continue
 
-            else:
-                others.append([header, (x,y,w,h)])
+        keys = ["header_%s"%int(i+1) for i in range(numHeader_state)]
+        header_dict = dict(zip(keys,header_state_list))
+        print(header_dict)
 
-            # print(header_list)
-            # print(department_header)
-            # print(header_state_list)
+        # remove stop words and get office informaiton from the rest of the list. 
+
+        # d = dict(zip(L1, L2))
 
 
-        # creat a dictionary from state and department header
-        headers_name_loc =header_state_list
-        keys =  ["office_header_%s"%int(i+1) for i in range(numHeader_state)]
-        header_dict = dict(zip(keys,headers_name_loc))
-
-        # add department name and location to header
-        header_dict['department_header'] = department_header
-
-        return header_dict, others
-
-    @staticmethod
-    def check_department_info(header):
-        department_name = ''
-        for i in range(0, len(header)):
-            if regex.match("(?:%s){e<=1}" % 'Department', header[i].title()) != None:
-                department_name = ' '.join(header[:i+1]).title()
-                return department_name
-                break
-            elif i == len(header):
-                return None
+            # print(state)
 
     @staticmethod
     def check_state_info(header):
-
+        print("***********************************")
+        print(header)
         my_file = open("state_names.txt", "r")
         with open("state_names.txt") as f:
             state_list = f.read().splitlines()
         state_names = []
         for myStr in header:
             myStr = myStr.title()
-            fuzzy_search_thresh = max(int(len(myStr)*0.25),1)
-            result = [x for x in state_list if regex.match("(?:%s){i<=%s,d<=%s,s<=%s,1i+2d+2s<=%s}" % (x,fuzzy_search_thresh,fuzzy_search_thresh, fuzzy_search_thresh, str(int(fuzzy_search_thresh)+2)), myStr) !=None ]
+            result = [x for x in state_list if regex.match("(?:%s){e<=1}" % x, myStr) !=None ]
             if len(result) >0:
                 state_names.append(result[0])
+        print("found state: %s"% state_names)
+
         if len(state_names)>0:
             return state_names
         else:
@@ -121,7 +69,8 @@ class Post:
         my_file = open("state_names.txt", "r")
         with open("state_names.txt") as f:
             state_list = f.read().splitlines()
-
+        print(state_list)
+        # print(states)
         department_name = header.iloc[0,0].strip().lower()
         office_and_state = header.iloc[1,0].split(sep = '—')
         office = office_and_state[0].strip().lower()
@@ -261,9 +210,7 @@ class Name:
 # print(result)
 
 
-            # stop_words = set(stopwords.words('english'))
-            # filtered_sentence = [w for w in header if not w in stop_words]
-            # print(filtered_sentence)
+
 
 
 

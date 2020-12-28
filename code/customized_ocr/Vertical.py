@@ -9,19 +9,16 @@ class Vertical(Page):
     @staticmethod
     def lookfor_vertical_contours(binary_nparr):
         jpg_tolook = binary_nparr.copy()
-        kernel  = cv2.getStructuringElement(cv2.MORPH_RECT, # this structuring element acts like a "sliding scanner"
-                                                      ksize=(1,250))  # basically a vertical line scanning the image. If such line is detected, then pixe;s turned into 1, otherwise 0, such that everything else is deleted.
-
+        line_Height = 60
+        line_Width = 1
+        verticalStructure = cv2.getStructuringElement(cv2.MORPH_RECT, # this structuring element acts like a "sliding scanner"
+                                                      ksize=(line_Width,
+                                                             line_Height))  # basically a vertical line scanning the image. If such line is detected, then pixe;s turned into 1, otherwise 0, such that everything else is deleted.
+        # print(len(verticalStructure))
         somePoint = (-1,-1)
-
-        vertical_contours = cv2.erode(jpg_tolook,kernel, somePoint)  # single out vertical lines
-        # Page.display(vertical_contours)
-
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(1,1500))
-        vertical_contours = cv2.dilate(vertical_contours, kernel, somePoint, iterations=2)
-        # Page.display(vertical_contours)
-
-
+        vertical_contours = cv2.erode(jpg_tolook, verticalStructure, somePoint)  # single out vertical lines
+        # vertical_contours = cv2.dilate(vertical, verticalStructure, myPoint, iterations=1)
+        # Vertical.display(vertical_contours)
         return vertical_contours
 
     @staticmethod
@@ -38,13 +35,16 @@ class Vertical(Page):
                                 minLineLength,
                                 maxLineGap)
 
+        numlines = int(len(lines))                             # ************ error: QAQ the input was not iterable beccause this value was not set to an int. I think.
+        print("number of [vertical lines of min length = ", minLineLength, "from HoughineLine: ", numlines,
+              " |||e.g. the first line [x1,y1,x2,y2]: ", lines[0])
+
         if display == True:
             p = Page.create_blankpage(somecontours_binary_nparr)
-            for i in range(len(lines)):
+            for i in range(numlines):
                 for x1, y1, x2, y2 in lines[i]:
                     p = cv2.line(p, (x1, y1), (x2, y2), 255, 2)
-        if lines is None:
-            return []
+
         return lines # a list obj [[[]],[[]]]
 
     @staticmethod
@@ -76,7 +76,7 @@ class Vertical(Page):
         return lines
 
     @staticmethod
-    def finalize_vertical_line(houghlines_pts, page_height = 0, display = False):
+    def finalize_vertical_line(houghlines_pts,page_height = 0, monitor = False, display = False):
         ptList = [[(x1,y1), (x2,y2)] for [[x1,y1, x2,y2]] in houghlines_pts]
         ptList.sort(key = lambda k: k[1][0]) # sorting on x2
         final_lines = []
@@ -101,55 +101,24 @@ class Vertical(Page):
                 final_lines.append(finalLine)
                 xAvg = x1_current
 
+
+            else:
+                print("last line", lastLine)
+                print("current line", currentLine)
             if i == len(ptList) -1:
                 (x1, y1), (x2, y2) = currentLine
                 finalLine = [int(xAvg),0, x2,page_height]
                 final_lines.append(finalLine)
 
-        final_lines.sort(key = lambda x: x[0])
-
-        # [[991, 0, 992, 2690], [1301, 0, 1302, 2690], [1967, 0, 1968, 2690], [2177, 0, 2179, 2690]]
-        if len(final_lines) <=5:
-            if len(final_lines) == 5:
-                if final_lines[0][0]>300:
-                    final_lines.insert(0,[ max(final_lines[0][0]-500,0), final_lines[0][1], max(final_lines[0][2]-500,0), final_lines[0][3]])
-                elif final_lines[3][0] <= 2300:
-                        final_lines.insert(-1, [min(final_lines[0][0] + 300, 2831), final_lines[0][1],
-                                                min(final_lines[0][2] + 300, 2831),
-                                                final_lines[0][3]])
-            elif len(final_lines)==4:
-                if final_lines[0][0] > 300:
-                    final_lines.insert(0, [max(final_lines[0][0] - 500,0), final_lines[0][1], max(final_lines[0][2] - 500,0),
-                                           final_lines[0][3]])
-
-                if final_lines[3][0] <= 2300:
-                    final_lines.insert(-1, [min(final_lines[3][0] + 450,2831), final_lines[0][1], min(final_lines[3][2] + 450,2831),
-                                           final_lines[0][3]])
-
-        final_lines.sort(key = lambda x: x[0])
 
         print("we found %s vertical lines: " % (len(final_lines)) )
         print(final_lines)
 
-
-        # if len(final_lines) ==5 :
-        #     if final_lines[0][0]>300:
-        #         x1,y1,x2,y2 = final_lines[0]
-        #         final_lines.append([0, y1, 0,y2])
-        #     else:
-        #         x1, y1, x2, y2 = final_lines[-1]
-        #         final_lines.append([x1+300,y1,0,y2, x2+300])
-        # elif len(final_lines) == 4:
-        #     x1, y1, x2, y2 = final_lines[0]
-        #     final_lines.append([1, y1, 1, y2])
-        #     x1, y1, x2, y2 = final_lines[-1]
-        #     final_lines.append([x1 + 300, y1, 0, y2, x2 + 300])
-        #
-        # print("we found %s vertical lines: " % (len(final_lines)) )
-        # print(final_lines)
-
         return final_lines
 
+
+
+    #
     @staticmethod
     def create_column_borders(page,draw = False ):
         contours = Vertical.lookfor_vertical_contours(page)

@@ -60,37 +60,29 @@ class Page:
         plt.show()
 
     @staticmethod
-    def display_overlay(img1, img2, weight1 = 0.3, weight2= 0.5, show = True):
+    def display_overlay(img1, img2, weight1 = 0.3, weight2= 0.5):
         try:
             img1 = cv2.cvtColor(img1, cv2.COLOR_GRAY2RGB)
             out = cv2.addWeighted(img1, 0.3, img2, 0.5, 0)
-            if show == True:
-                Page.display(out)
+            Page.display(out)
         except:
             out = cv2.addWeighted(img1, 0.3, img2, 0.5, 0)
-            if show == True:
-                Page.display(out)
+            Page.display(out)
             # print("Error displaying overlaid image, check if both pictures are RGB.")
 
         return out
     @staticmethod
-    def show_images(images, numCol=3, outPath = None) -> None:
+    def show_images(images, numCol=3) -> None:
         n: int = len(images)
         f = plt.figure()
         for i in range(n):
             f.add_subplot(n, numCol, i + 1)  # (total # of img, num col, index in list)
             plt.xticks([]), plt.yticks([])
             plt.imshow(images[i], cmap='gray', interpolation='bicubic')
-
-        if outPath == None:
-            plt.show(block=True)
-
-        if outPath != None:
-            plt.savefig(outPath)
+        plt.show(block=True)
 
 
-    @staticmethod
-    def show_cell_in_table(cell_images, fileName = None):
+    def show_cell_in_table(cell_images) -> None:
         nCol = len(cell_images[0])
         nrow = len(cell_images)
 
@@ -102,13 +94,8 @@ class Page:
             plt.xticks([]), plt.yticks([])
             plt.imshow(cell_images_extract[i], cmap='gray', interpolation='bicubic')
 
-        if fileName == None:
-            plt.show(block=True)
 
-        if fileName != None:
-            plt.savefig(fileName)
-
-
+        plt.show(block=True)
 
 
         # expressed as a fraction of the average axis height
@@ -129,19 +116,19 @@ class Page:
     # if want to display, draw very thick lines.
 
     def draw_lines(pt_list, any_image,thickness = 1, display = False, color = 255):
-
         if len(pt_list[0] )== 2:
             for [(x1,y1),(x2,y2)] in pt_list:
                 print([(x1,y1),(x2,y2)])
                 if color == "rand":
                     color = (random.randrange(0,255), random.randrange(0,255),random.randrange(0,255))
                 lines = cv2.line(any_image, (x1,y1), (x2,y2), color, thickness)
-
-
         elif len(pt_list[0]) ==1:
             for [[x1,y1,x2,y2]] in pt_list:
+                if color == "rand":
+                    color = (random.randrange(0,255), random.randrange(0,255), random.randrange(0,255))
                 lines = cv2.line(any_image, (x1,y1), (x2,y2), color, thickness)
         else:
+
             for [x1,y1,x2,y2] in pt_list:
                 if color =="rand":
                     color = (random.randrange(0,255), random.randrange(0,255), random.randrange(0,255))

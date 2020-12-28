@@ -5,8 +5,6 @@ from Page import Page
 from Vertical import Vertical
 import math
 
-np.set_printoptions(linewidth=5000, threshold=5000)
-
 
 class Horizontal():
     # s1.3 detect the dots to set up for rows
@@ -14,7 +12,7 @@ class Horizontal():
 
     @staticmethod
     def find_all_dots(binary_page, display=False, customKernel=[]):
-        # print(">Looking for all single dot patterns <")
+        print(">Looking for all single dot patterns <")
 
         # these are hand-made kernels/ scanners. haha.
         # to detect 1-dot patterns, we need to confirm that there is enough white space in its surrounding
@@ -43,81 +41,34 @@ class Horizontal():
     # convert detected dots to lines.
     @staticmethod
     def dotted_to_lines(dots_img):
-        # print(">De-noise:  looking for consecutive dots that forms horizontal lines with custom filter<")
-        sixDots = np.array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-                            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-                            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-                            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], np.uint8)
+        print(">De-noise:  looking for consecutive dots that forms horizontal lines with custom filter<")
+        sixDots = np.array([[0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+                             1, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+                            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+                             1, 0, 0, 0, 0, 1, 1, 1, 1, 1],
+                            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+                             1, 0, 0, 0, 0, 1, 1, 1, 1, 1],
+                            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+                             1, 0, 0, 0, 0, 1, 1, 1, 1, 1],
+                            [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+                             1, 0, 0, 0, 0, 0, 0, 1, 0, 0]], np.uint8)
 
-        # Page.display(dots_img)
-        # lines_eroded = cv2.erode(dots_img, sixDots, (-1, -1),
-        #                             iterations=1)  # get rid of the noises that don't have 6 dots in a row
-        # Page.display(lines_eroded)
-        # lines_dilated = cv2.dilate(lines_eroded, sixDots, (-1, -1), iterations=1)
-        # Page.display(lines_dilated)
-        #
-        #
-        # kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(50,1))
-        # lines_eroded_2 = cv2.erode(lines_dilated, kernel)
-        # lines_dilated_2 = cv2.dilate(lines_eroded_2, kernel)
-
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(10,5))
-        dots_img = cv2.erode(dots_img,kernel)
-        # Page.display(dots_img)
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(100,2))
-        dots_img = cv2.dilate(dots_img,kernel)
-        # Page.display(dots_img)
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(250,2))
-        dots_img = cv2.erode(dots_img,kernel)
-
-        # Maybe don't need these two iterations, just ^^ precision
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(800,1))
-        dots_img = cv2.erode(dots_img,kernel)
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(400,1))
-        dots_img = cv2.dilate(dots_img,kernel, iterations = 2)
-        # Page.display(dots_img)
-
-        lines = cv2.HoughLinesP(dots_img,
+        lines_eroded = cv2.erode(dots_img, sixDots, (-1, -1),
+                                    iterations=1)  # get rid of the noises that don't have 6 dots in a row
+        lines_dilated = cv2.dilate(lines_eroded, sixDots, (-1, -1), iterations=1)
+        lines = cv2.HoughLinesP(lines_dilated,
                                 2,
                                 # rho, the fatness of the data, https://stackoverflow.com/questions/40531468/explanation-of-rho-and-theta-parameters-in-houghlines
                                 np.pi / 180  # theta
-                                , threshold=800
+                                , threshold=1000
                                 # the bigger this value is, the less lines in the result (which is good)
-                                , minLineLength=90
+                                , minLineLength=200
                                 , maxLineGap=700)
 
+        numLines = len(lines)
+        print("number of lines after houghline detection. ", numLines)
 
-        horizontal_lines = []
-
-        for [[x1,y1,x2,y2]] in lines:
-            angle = np.arctan2(y2 - y1, x2 - x1) * 180.0 / np.pi
-            if abs(angle) in range(0, 15):
-                horizontal_lines.append([[x1,y1,x2,y2]])
-
-        # a = cv2.cvtColor(dots_img.copy(), cv2.COLOR_GRAY2RGB)
-        # Page.draw_lines(horizontal_lines, a, thickness =2, color = (255,0,0))
-        # Page.display(a)
-        # print(horizontal_lines)
-
-        # a = cv2.cvtColor(dots_img, cv2.COLOR_GRAY2RGB)
-        # Page.draw_lines(horizontal_lines, a, color = (255, 0, 0), thickness = 3)
-        # Page.display(a)
-
-        # outPath = r"D:\MLProjects\CVHistorical\out\mask"
-        # fileName = fileName + ".png"
-        # outPath = os.path.join(outPath, fileName)
-        # print("mask realted  file saved to : %s" % outPath)
-        # cv2.imwrite(outPath, mask_pic)
-        # outPath = r"D:\MLProjects\CVHistorical\out\mask\test20201125\horizontal_S1"
-        # outPath = os.path.join(outPath, fileName)
-        # a = Page.draw_lines(lines, colored.copy(), thickness=3)
-        # cv2.imwrite(outPath, a)
-
-        # numLines = len(lines)
-        # print("number of lines after houghline detection. ", numLines)
-
-        return horizontal_lines
+        return lines, lines_dilated
 
     # get rid of two lines that are very close
     @staticmethod
@@ -135,32 +86,23 @@ class Horizontal():
             list.append([x1, y1, x2, y2])
 
         sorted_list = sorted(list, key=lambda k: [k[1]])
-        # print("lines after sorting:")
-        # print(sorted_list)
 
         filtered_horizontals = []
-
-        y1 = sorted_list[0][1]
         for i in range(len(sorted_list) - 1):
-            # print("line: ", sorted_list[i])
+
             x1 = 0
-            # y1 = sorted_list[i][1]
+            y1 = sorted_list[i][1]
             x2 = page_length
             y2 = sorted_list[i][3]
             y1_next = sorted_list[i + 1][1]
             distance = y1_next - y1
             # print(distance)
             tilt = abs(y1 - y2)
-            # print(tilt, distance)
-            # print("horizontal filtering: tilt = %s, distance = %s"%(tilt, distance))
-            if (distance > 30) and (tilt < 15):  # get rid of two very close lines
-                filtered_horizontals.append([x1, y1, x2, y1])
-                y1 = y1_next
+            if (distance > 20) and (tilt < 100):  # get rid of two very close lines
+                filtered_horizontals.append([x1, y1, x2, y2])
 
-            # else:
-            #     need to store informaiton for the next line
-        # print("number of lines after filtering: ", len(filtered_horizontals))
-        # print("filtered lines: ", filtered_horizontals)
+        print("number of lines after filtering: ", len(filtered_horizontals))
+        print("filtered lines: ", filtered_horizontals)
 
         return filtered_horizontals  # [[],[],[]]            # all lines that have distance > 20 between them
 
@@ -195,12 +137,7 @@ class Horizontal():
 
         # print("while loop 1")
         reached_the_bottom = False
-        # try:
-        #             # except:
-               #     print( "error: there is only %s elements in this list: " %len(horizontals_populated))
-
         line_above = int(horizontals_populated[len(horizontals_populated) - 1][1])
-
         while (reached_the_bottom == False):
             new_line_y = line_above + 33
             if new_line_y < page_height:
@@ -223,7 +160,7 @@ class Horizontal():
                 reached_the_top = True
 
         horizontals_populated = sorted(horizontals_populated, key=lambda k: [k[1]])
-        # print("final horizontal mask: ", horizontals_populated)
+        print("final horizontal mask: ", horizontals_populated)
 
         return horizontals_populated
 
