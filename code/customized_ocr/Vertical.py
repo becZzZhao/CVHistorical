@@ -6,20 +6,6 @@ class Vertical(Page):
 
 
     #some more primitive methods relating to line detection
-    @staticmethod
-    def lookfor_vertical_contours(binary_nparr):
-        jpg_tolook = binary_nparr.copy()
-        line_Height = 60
-        line_Width = 1
-        verticalStructure = cv2.getStructuringElement(cv2.MORPH_RECT, # this structuring element acts like a "sliding scanner"
-                                                      ksize=(line_Width,
-                                                             line_Height))  # basically a vertical line scanning the image. If such line is detected, then pixe;s turned into 1, otherwise 0, such that everything else is deleted.
-        # print(len(verticalStructure))
-        somePoint = (-1,-1)
-        vertical_contours = cv2.erode(jpg_tolook, verticalStructure, somePoint)  # single out vertical lines
-        # vertical_contours = cv2.dilate(vertical, verticalStructure, myPoint, iterations=1)
-        # Vertical.display(vertical_contours)
-        return vertical_contours
 
     @staticmethod
     def determine_houghlines(somecontours_binary_nparr, display = False):
@@ -74,78 +60,6 @@ class Vertical(Page):
             Page.display(lines)
 
         return lines
-
-    @staticmethod
-    def finalize_vertical_line(houghlines_pts,page_height = 0, monitor = False, display = False):
-        ptList = [[(x1,y1), (x2,y2)] for [[x1,y1, x2,y2]] in houghlines_pts]
-        ptList.sort(key = lambda k: k[1][0]) # sorting on x2
-        final_lines = []
-
-        xAvg = ptList[0][0][0]
-        for i in range(1, len(ptList)):
-
-            currentLine = ptList[i]
-            lastLine = ptList[i-1]
-
-            x1_current = currentLine[0][0]
-            x1_previous = lastLine[0][0]
-
-            xDist = x1_current- x1_previous
-
-            if xDist < 10:
-                xAvg = (x1_current + xAvg)/2
-
-            elif xDist > 50:
-                (x1,y1), (x2,y2) = lastLine
-                finalLine = [int(xAvg),0, x2,page_height]
-                final_lines.append(finalLine)
-                xAvg = x1_current
-
-
-            else:
-                print("last line", lastLine)
-                print("current line", currentLine)
-            if i == len(ptList) -1:
-                (x1, y1), (x2, y2) = currentLine
-                finalLine = [int(xAvg),0, x2,page_height]
-                final_lines.append(finalLine)
-
-
-        print("we found %s vertical lines: " % (len(final_lines)) )
-        print(final_lines)
-
-        return final_lines
-
-
-
-    #
-    @staticmethod
-    def create_column_borders(page,draw = False ):
-        contours = Vertical.lookfor_vertical_contours(page)
-        houghlines = Vertical.determine_houghlines(contours,display = False )
-        finalized_borders_list = Vertical.finalize_vertical_line(houghlines,len(page))
-
-        if draw == False:
-            return finalized_borders_list
-
-        if draw == True:
-            print("**drawing vertical borders on page")
-            drawn_page = Page.draw_lines(finalized_borders_list, page)
-            return drawn_page, finalized_borders_list
-
-
-
-# # # testing the methods:
-# p = Page.rawtobinary('test.jpg')
-# blank = Page.create_blankpage(size_referece_page= p)
-# contours= Vertical.lookfor_vertical_contours(p)
-# lines_pts = Vertical.determine_houghlines(contours,display = False )
-# #Vertical.draw_line(blank,(0,599),(100,599),color =255, thickness = 4,display = False)
-# finals = Vertical.finalize_vertical_line(lines_pts,len(blank))
-# Page.display_lines(finals,p)
-
-# p = Page.rawtobinary('eg1.jpg')
-# Vertical.create_column_borders(p,draw=False)
-
-
-#******next: locate the four lines, draw the four lines.
+    
+############### code below removed for protecting my work efforts. This script is for demonstration purpose only.
+############### if you would like to learn more about the project, you are welcome to email beczhaozmy@gmail.com
