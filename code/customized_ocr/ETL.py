@@ -57,24 +57,9 @@ def PDF_to_JPG_pages():
     os.chdir(r"C:\Users\Mengyue Zhao\PycharmProjects\cv3\venv")
 
 
-def PDF_to_JPG_pages(path):
-# download poppler binary from https://github.com/oschwartz10612/poppler-windows/releases/ then get the bin directory
 
-    os.chdir(path)
-    poppler_path = r"C:\Users\Mengyue Zhao\PycharmProjects\cv3\venv\Lib\site-packages\poppler-20.11.0\bin"
-    pdfs= os.listdir(path)
-
-
-    for pdf in pdfs:
-        fileName = pdf.split('.')[0]
-        print(fileName)
-        # info = pdfinfo_from_path(pdf_path, userpw=None, poppler_path=poppler_path)
-        page = convert_from_path(pdf,  first_page=1, last_page = 1,poppler_path=poppler_path)[0]
-        outFileDir = fileName + '.jpg'
-        page.save(outFileDir, 'JPEG')
-
-
-    os.chdir(r"C:\Users\Mengyue Zhao\PycharmProjects\cv3\venv")
+############### parts of the code removed for protecting my work efforts. This script is for demonstration purpose only.
+############### if you would like to learn more about the project, you are welcome to email beczhaozmy@gmail.com
 
 # def df_to_db(df):
 #
