@@ -5,18 +5,9 @@ from functools import reduce
 from datetime import datetime
 
 
+############### parts of the code removed for protecting my work efforts. This script is for demonstration purpose only.
+############### if you would like to learn more about the project, you are welcome to email beczhaozmy@gmail.com
 
-class Post:
-    @staticmethod
-    def analyze_header_info(header):
-        next
-
-        # split string
-        # look for department, if found and no state info, it is header_page.
-        # look for state information, if found, it is a header_state, the table header.
-        # the block of text bellow header_state is the table content, assign state to
-        # skip column name at this point.
-        # use a dict
 
     @staticmethod
     def check_header_info(header_list):
@@ -63,25 +54,6 @@ class Post:
         else:
             return None
 
-    @staticmethod
-    def clean_header(header):
-        # states = pd.read_csv('state_names.txt', sep = '\t')
-        my_file = open("state_names.txt", "r")
-        with open("state_names.txt") as f:
-            state_list = f.read().splitlines()
-        print(state_list)
-        # print(states)
-        department_name = header.iloc[0,0].strip().lower()
-        office_and_state = header.iloc[1,0].split(sep = '—')
-        office = office_and_state[0].strip().lower()
-        myState = office_and_state[1]
-        state_name = [x for x in state_list if regex.match("(?:%s){e<=1}" % x, myState) !=None ][0]
-
-
-
-        print("State Name:  >%s< " % state_name)
-        print("Department Name:  >%s< " % department_name)
-        print("Office Name:  >%s< " %office)
 
 
 class Name:
@@ -186,32 +158,8 @@ class Name:
 
 
 
-
-
-
-
-# import pandas
-# from functools import reduce
-#
-# def get_counts(chunk):
-#     voters_street = chunk[
-#         "Residential Address Street Name "]
-#     return voters_street.value_counts()
-#
-# def add(previous_result, new_result):
-#     return previous_result.add(new_result, fill_value=0)
-#
-# # MapReduce structure:
-# chunks = pandas.read_csv("voters.csv", chunksize=1000)
-# processed_chunks = map(get_counts, chunks)
-# result = reduce(add, processed_chunks)
-#
-# result.sort_values(ascending=False, inplace=True)
-# print(result)
-
-
-
-
+############### code below removed for protecting my work efforts. This script is for demonstration purpose only.
+############### if you would like to learn more about the project, you are welcome to email beczhaozmy@gmail.com
 
 
 
