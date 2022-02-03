@@ -1,4 +1,14 @@
-Please refer to "Using Deep Learning Techniques to Improve OCR solutions - V1.pptx" for a description of the current state (results, proposal, etc.) and the background of this project.\
+
+I significantly enhanced the output of Optical Character Recognition tools for historical documents by a few simple changes. And the glued-together (:)) project outperforms most commercial OCR software or Open-source Deep Learning OCR engines.  This is a continuation of a personal project that I did in the past to create big data for modern historians.
+
+
+Checkout my paper for results, comparisons and some discussions:
+https://www.linkedin.com/posts/mengyue-rebecca-zhao-a15bb8111_machine-vision-tools-enhancement-for-ocr-activity-6893647253307736064-dONL
+
+
+
+
+\
 \
 \
 The relevant codes are included in two folders:\
