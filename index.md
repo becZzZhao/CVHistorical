@@ -1,6 +1,9 @@
 ## Welcome
 
-My name is Rebecca (Mengyue Zhao). I am a data scientist who now works in the private sector. I completed a degree of MSc in Economic and Social History at the University of Oxford in 2018, and have been working on this project since 2016. 
+My name is Rebecca (Mengyue Zhao). I am a data scientist who now works in the private sector. I completed a degree of MSc in Economic and Social History at the University of Oxford in 2018, and have been working on this project since 2016. Please feel free to get in touch if you want to learn more about my projects. 
+- email: beczhaozmy@gmail.com
+- LinkedIn: [Link]([url](https://www.linkedin.com/in/mengyue-rebecca-zhao-a15bb8111/))
+
 
 <p align="center">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3fj6rooEX7A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
