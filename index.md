@@ -2,10 +2,8 @@
 
 My name is Rebecca (Mengyue Zhao). I am a data scientist who now works in the private sector. I completed a degree of MSc in Economic and Social History at the University of Oxford in 2018, and have been working on this project since 2016. Please feel free to get in touch if you want to learn more about my projects. 
 - email: beczhaozmy@gmail.com
-- LinkedIn: [Link]([url](https://www.linkedin.com/in/mengyue-rebecca-zhao-a15bb8111/))
-- [LinkedIn](https://www.linkedin.com/in/mengyue-rebecca-zhao-a15bb8111/)
-- Read my paper on the OCR project: [Link]([url](https://www.linkedin.com/posts/mengyue-rebecca-zhao-a15bb8111_machine-vision-tools-enhancement-for-ocr-activity-6893647253307736064-dONL?utm_source=linkedin_share&utm_medium=member_desktop_web))
-
+- [Get in touch through LinkedIn](https://www.linkedin.com/in/mengyue-rebecca-zhao-a15bb8111/)
+- Read [my paper](https://www.linkedin.com/posts/mengyue-rebecca-zhao-a15bb8111_machine-vision-tools-enhancement-for-ocr-activity-6893647253307736064-dONL?utm_source=linkedin_share&utm_medium=member_desktop_web) on this OCR project
 
 
 <p align="center">
