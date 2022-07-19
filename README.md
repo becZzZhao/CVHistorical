@@ -1,3 +1,6 @@
+test test test
+
+
 
 I significantly enhanced the output of Optical Character Recognition tools for historical documents by a few simple changes. And the glued-together (:)) project outperforms most commercial OCR software or Open-source Deep Learning OCR engines.  This is a continuation of a personal project that I did in the past to create big data for modern historians.
 
