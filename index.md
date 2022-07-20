@@ -4,7 +4,7 @@ My name is Rebecca (Mengyue Zhao). I am a data scientist who now works in the pr
 - email: beczhaozmy@gmail.com
 - [Get in touch through LinkedIn](https://www.linkedin.com/in/mengyue-rebecca-zhao-a15bb8111/)
 - Read [my paper](https://www.linkedin.com/posts/mengyue-rebecca-zhao-a15bb8111_machine-vision-tools-enhancement-for-ocr-activity-6893647253307736064-dONL?utm_source=linkedin_share&utm_medium=member_desktop_web) on this OCR project
-- Read my paper on the town-level, nation-wide postal revenue for Nineteenth-Cetury America: [The Economic Geography of Nineteenth-Century America --Mapping from National-Scale, Town-Level Postal Revenue]()
+- Read my paper on the town-level, nation-wide postal revenue for Nineteenth-Cetury America: [The Economic Geography of Nineteenth-Century America --Mapping from National-Scale, Town-Level Postal Revenue](https://github.com/becZzZhao/CVHistorical/blob/decb15239f242eb1f2b5e652fa10f86b2a2c83c4/20220607%20The%20Economic%20Geography%20of%2019th%20Century%20America%20-%20Edit%201%20-%20Mengyue%20Zhao.pdf)
 
 
 ### the Machine Vision Project in Action
