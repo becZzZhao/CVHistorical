@@ -7,22 +7,22 @@ My name is Rebecca (Mengyue Zhao). I am a data scientist who now works in the pr
 - Read my paper on the town-level, nation-wide postal revenue for Nineteenth-Century America: [The Economic Geography of Nineteenth-Century America --Mapping from National-Scale, Town-Level Postal Revenue](https://github.com/becZzZhao/CVHistorical/blob/decb15239f242eb1f2b5e652fa10f86b2a2c83c4/20220607%20The%20Economic%20Geography%20of%2019th%20Century%20America%20-%20Edit%201%20-%20Mengyue%20Zhao.pdf)
 
 
-### the Machine Vision Project in Action
+## the Machine Vision Project in Action
     I built a stable and efficient workflow to handle the poor layouts of historical tables using machine vision techniques. OCR tasks for tabular data requires extremely high accuracy from the page layout analysis due to the need to align column and rows. Commercial software packages do not handle these tasks well, because they are not trained to detect old (Nineteenth-Century) table format. The page layout information is then feed into a deep learning OCR engine. The result is a dramatic increase in OCR accuracy.
 
 <p align="center">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Jh_KobCtuIQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </p>
 
-### The Economic Geography of Nineteenth-Century America <br/>
+## Performance Comparison
+### Page Segmentation Results Comparison
+(20220710 Presentation Slides - Page Segmentation Results.jpg)
+### OCR Results Comparison
+
+## Visualzed Data - The Economic Geography of Nineteenth-Century America <br/>
 #### Example of New York
+
  ![](Hotspot Analysis Animation - NYC.gif)
-
-### Introduction
-Historians who found large “gold mines” of datasets might have all experienced the pain of digitizing them. This paper presents a solution for digitizing large historical datasets by combing, enhancing, and developing on open-source AI and machine vision tools. The example used in this paper is the Nineteenth-Century Official Registers of the United States which contains millions of employee information throughout the century in tabular format. This is a challenging example because the tables have poor structures and noisy backgrounds that cannot be handled by commercial OCR software. While this paper focuses on the implementation of the technique on historical tables, it also has broader implication for historians who wants to tailor their OCR tools for any type of non-typically structured historical documents. All software used in this paper is open-source and free.
-
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3fj6rooEX7A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ### the Official Register of the United States
