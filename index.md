@@ -14,6 +14,10 @@ I built a stable and efficient workflow to handle the poor layouts of historical
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Jh_KobCtuIQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </p>
 
+## Visualzed Data - The Economic Geography of Nineteenth-Century America <br/>
+#### Example of New York
+ ![](Hotspot Analysis Animation - NYC.gif)
+
 ## Introduction 
 ![](Intro Page.png)
 
@@ -26,12 +30,6 @@ I built a stable and efficient workflow to handle the poor layouts of historical
 ![](OCR Output Comparison 2.PNG)
 ## Final Output
 ![](OCR Output - Final.png)
-
-
-## Visualzed Data - The Economic Geography of Nineteenth-Century America <br/>
-#### Example of New York
-
- ![](Hotspot Analysis Animation - NYC.gif)
 
 
 ### the Official Register of the United States
