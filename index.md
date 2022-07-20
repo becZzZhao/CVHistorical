@@ -8,7 +8,7 @@ My name is Rebecca (Mengyue Zhao). I am a data scientist who now works in the pr
 
 
 ## the Machine Vision Project in Action
-    I built a stable and efficient workflow to handle the poor layouts of historical tables using machine vision techniques. OCR tasks for tabular data requires extremely high accuracy from the page layout analysis due to the need to align column and rows. Commercial software packages do not handle these tasks well, because they are not trained to detect old (Nineteenth-Century) table format. The page layout information is then feed into a deep learning OCR engine. The result is a dramatic increase in OCR accuracy.
+I built a stable and efficient workflow to handle the poor layouts of historical tables using machine vision techniques. OCR tasks for tabular data requires extremely high accuracy from the page layout analysis due to the need to align column and rows. Commercial software packages do not handle these tasks well, because they are not trained to detect old (Nineteenth-Century) table format. The page layout information is then feed into a deep learning OCR engine. The result is a dramatic increase in OCR accuracy.
 
 <p align="center">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Jh_KobCtuIQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
