@@ -12,7 +12,7 @@ My name is Rebecca (Mengyue Zhao). I am a data scientist who now works in the pr
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Jh_KobCtuIQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </p>
 
-### The Economic Geography of Nineteenth-Century America - Example of New York
+### The Economic Geography of Nineteenth-Century America /- Example of New York
  ![](Hotspot Analysis Animation - NYC.gif)
 
 ### Introduction
