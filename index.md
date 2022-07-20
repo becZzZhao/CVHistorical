@@ -14,13 +14,19 @@ I built a stable and efficient workflow to handle the poor layouts of historical
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Jh_KobCtuIQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </p>
 
+## Introduction 
+![](Intro Page.png)
+
 ## Performance Comparison
 ### Page Segmentation Results Comparison
-![](20220710 Presentation Slides - Page Segmentation Results.jpg)
-![](20220710 Page Segmentation Results Comparison 2.jpg)
+![](Output Comparison - Page Segmentation 1.png)
+![](Output Comparison - Page Segmentation 2.png)
 ### OCR Results Comparison
-![](20220720 OCR Output Comparison 1.jpg)
-![](20220720 OCR Output Comparison 2.jpg)
+![](OCR Output Comparison 1.PNG)
+![](OCR Output Comparison 2.PNG)
+## Final Output
+![](OCR Output - Final.png)
+
 
 ## Visualzed Data - The Economic Geography of Nineteenth-Century America <br/>
 #### Example of New York
