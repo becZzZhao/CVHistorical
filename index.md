@@ -19,7 +19,8 @@ I built a stable and efficient workflow to handle the poor layouts of historical
 ![](20220710 Presentation Slides - Page Segmentation Results.jpg)
 ![](20220710 Page Segmentation Results Comparison 2.jpg)
 ### OCR Results Comparison
-
+![](20220720 OCR Output Comparison 1.png)
+![](20220720 OCR Output Comparison 2.jpg)
 ## Visualzed Data - The Economic Geography of Nineteenth-Century America <br/>
 #### Example of New York
 
