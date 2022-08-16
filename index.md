@@ -21,7 +21,7 @@ I built a stable and efficient workflow to handle the poor layouts of historical
 ## Introduction 
 ![](Intro Page.png)
 ## Solution Architecture
-![](Solution Architecture.PNG)
+![](Solution Architecture.png)
 ## Performance Comparison
 ### Page Segmentation Results Comparison
 ![](Output Comparison - Page Segmentation 1.png)
