@@ -21,7 +21,7 @@ I built a stable and efficient workflow to handle the poor layouts of historical
 ## Introduction 
 ![](Intro Page.png)
 ## Solution Architecture
-![](Solution Architecture.png)
+![](Solution Architecture.PNG)
 ## Performance Comparison
 ### Page Segmentation Results Comparison
 ![](Output Comparison - Page Segmentation 1.png)
@@ -30,7 +30,7 @@ I built a stable and efficient workflow to handle the poor layouts of historical
 ![](OCR Output Comparison 1.PNG)
 ![](OCR Output Comparison 2.PNG)
 ## Final Output
-![](OCR Output.png)
+![](OCR Output.PNG)
 ## Concluding Remarks
 ![](Findings.png)
 
