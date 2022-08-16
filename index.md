@@ -32,4 +32,7 @@ I built a stable and efficient workflow to handle the poor layouts of historical
 ![](OCR Output Comparison 2.PNG)
 ## Final Output
 ![](OCR Output.png)
+## Concluding Remarks
+![](Findings.png)
+
 
