@@ -25,7 +25,6 @@ I built a stable and efficient workflow to handle the poor layouts of historical
 ## Performance Comparison
 ### Page Segmentation Results Comparison
 ![](Output Comparison - Page Segmentation 1.png)
-\n
 ![](Output Comparison - Page Segmentation 2.png)
 ### OCR Results Comparison
 ![](OCR Output Comparison 1.PNG)
